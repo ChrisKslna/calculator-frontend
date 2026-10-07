@@ -1,0 +1,7 @@
+.env
+node_modules/
+dist/
+*.log
+__pycache__/
+*.py[cod]
+src/_responsive-check.html

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="支持四则运算、括号、小数和历史记录的在线计算器。">
+    <title>在线计算器</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <h1>在线计算器</h1>
+      </header>
+      <main>
+        <div class="workspace">
+          <section class="calculator panel" aria-label="计算器">
+            <form id="calculator-form">
+              <div class="display">
+                <label for="expression">输入算式</label>
+                <input id="expression" name="expression" type="text" autocomplete="off" spellcheck="false" maxlength="500" aria-describedby="feedback">
+                <div class="result-label" id="result-label">计算结果</div>
+                <output id="result" for="expression" aria-live="polite">0</output>
+              </div>
+              <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+              <div class="keypad" aria-label="计算器键盘">
+                <button type="button" class="key utility clear" data-action="clear" aria-label="清空输入">AC</button>
+                <button type="button" class="key utility" data-insert="(">(</button>
+                <button type="button" class="key utility" data-insert=")">)</button>
+                <button type="button" class="key utility" data-action="backspace" aria-label="退格">⌫</button>
+                <button type="button" class="key" data-insert="7">7</button><button type="button" class="key" data-insert="8">8</button><button type="button" class="key" data-insert="9">9</button><button type="button" class="key operator" data-insert="÷" aria-label="除">÷</button>
+                <button type="button" class="key" data-insert="4">4</button><button type="button" class="key" data-insert="5">5</button><button type="button" class="key" data-insert="6">6</button><button type="button" class="key operator" data-insert="×" aria-label="乘">×</button>
+                <button type="button" class="key" data-insert="1">1</button><button type="button" class="key" data-insert="2">2</button><button type="button" class="key" data-insert="3">3</button><button type="button" class="key operator" data-insert="-" aria-label="减或负号">−</button>
+                <button type="button" class="key" data-insert="0">0</button><button type="button" class="key" data-insert=".">.</button><button type="submit" class="key equals" id="calculate-button" aria-label="计算">=</button><button type="button" class="key operator" data-insert="+" aria-label="加或正号">+</button>
+              </div>
+            </form>
+          </section>
+          <section class="history panel" aria-labelledby="history-title">
+            <div class="panel-heading"><div class="history-title"><h2 id="history-title">历史记录</h2><span id="history-count" class="count">0</span></div><button type="button" id="refresh-history" class="text-button">刷新</button></div>
+            <div id="history-state" class="history-state" role="status">正在读取记录…</div>
+            <ol id="history-list" class="history-list" aria-label="历史计算记录"></ol>
+            <div class="pagination"><button type="button" id="previous-page" aria-label="上一页" disabled>←</button><span id="page-label">第 1 / 1 页</span><button type="button" id="next-page" aria-label="下一页" disabled>→</button></div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <dialog id="delete-dialog" aria-labelledby="delete-title">
+      <h2 id="delete-title">删除这条记录？</h2><p id="delete-description"></p><p class="dialog-note">删除后无法恢复。</p>
+      <div class="dialog-actions"><button type="button" id="cancel-delete">取消</button><button type="button" id="confirm-delete" class="danger-button">确认删除</button></div>
+    </dialog>
+    <noscript>请启用 JavaScript，以连接计算服务并查看历史记录。</noscript>
+  </body>
+</html>
