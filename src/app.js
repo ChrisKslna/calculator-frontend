@@ -1,5 +1,6 @@
 'use strict';
 
+const apiBase = new URL('./api', document.baseURI).pathname;
 const expressionInput = document.querySelector('#expression');
 const resultOutput = document.querySelector('#result');
 const resultLabel = document.querySelector('#result-label');
@@ -24,7 +25,7 @@ async function api(path, options = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 10000);
   try {
-    const response = await fetch(`/api${path}`, {
+    const response = await fetch(`${apiBase}${path}`, {
       ...options,
       headers: { 'Content-Type': 'application/json' },
       signal: controller.signal,

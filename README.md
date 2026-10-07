@@ -4,6 +4,8 @@
 
 前端只负责交互和接口请求；计算与历史存储由独立 Python 后端完成。
 
+在线访问：[在线计算器](http://117.50.199.166/chriskslna/)。2026-10-07 已完成公网页面、计算、历史和删除接口验收。
+
 ## 技术与环境
 
 - HTML、CSS、原生 JavaScript，无 npm 依赖和构建步骤。
@@ -42,7 +44,7 @@ serve.py 只负责提供静态页面及转发 /api/ 请求，不执行数学计�
 
 ## 接口和部署配置
 
-src/app.js 使用相对路径 /api。独立后端提供：
+src/app.js 根据当前页面目录生成 API 地址：根目录访问时使用 /api，部署在 /chriskslna/ 时使用 /chriskslna/api。独立后端提供：
 
 - POST /api/calculate
 - GET /api/history
@@ -51,7 +53,7 @@ src/app.js 使用相对路径 /api。独立后端提供：
 
 本地由 serve.py 转发到后端；公网部署由 Nginx 配置 proxy_pass。无需把服务器地址写进 JavaScript。数据库由后端自动初始化，本仓库不保存数据库和历史缓存。
 
-生产部署只需把 src/ 内文件放入独立 Nginx 静态目录，再代理 /api/。共享服务器请使用独立端口和站点，保留已有站点配置，详细说明见交付包 deploy/README.md。
+生产部署把 src/ 内文件放入独立 Nginx 静态目录，再代理 /api/。共享服务器可以使用独立端口，也可以为本项目增加独立路径，由 Nginx 去掉路径前缀后转发到本站。路径不带末尾斜线时应重定向到带斜线的地址。原首页和其他项目接口保持原有路由，详细说明见交付包 deploy/README.md。
 
 ## 目录
 
